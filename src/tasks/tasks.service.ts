@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 
-@Injectable()            //what is injectable 
+@Injectable()    //manage objects without thinking about the instantiation of them, because that is already managed by the injector
 export class TasksService {
   private tasks: Task[] = [];     // set of tasks 
 
@@ -12,11 +12,10 @@ export class TasksService {
     return this.tasks;
   }
 
+  /*  ************** if we search on tasks with filters ************************
   getTasksWithFilters(filterDto: GetTasksFilterDto): Task[] {
     const { status, search } = filterDto;
-
     let tasks = this.getAllTasks();
-
     // do something with status
     if (status) {
       tasks = tasks.filter((task) => task.status === status);
@@ -33,7 +32,7 @@ export class TasksService {
     }
 
     return tasks;
-  }
+  }*/
 
   getTaskById(id: string): Task {
     return this.tasks.find((task) => task.id === id);
@@ -52,7 +51,7 @@ export class TasksService {
     this.tasks.push(task);
     return task;
   }
-
+ 
   deleteTask(id: string): void {
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
